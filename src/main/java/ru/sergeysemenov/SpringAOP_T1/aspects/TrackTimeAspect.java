@@ -26,9 +26,7 @@ public class TrackTimeAspect {
         long start = System.currentTimeMillis();
         try {
             String methodName = joinPoint.getSignature().getName();
-            log.info("Start method: " + methodName);
             Object result = joinPoint.proceed();
-            log.info("result: " + result);
             long duration = System.currentTimeMillis() - start;
             MethodExecutionTiming methodExecutionTiming = executionTimingService.createExecutionTiming(methodName, duration, false);
             executionTimingService.save(methodExecutionTiming);
