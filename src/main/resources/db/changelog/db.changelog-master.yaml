@@ -1,0 +1,175 @@
+databaseChangeLog:
+  - changeSet:
+      id: DEV-1
+      author: sergeysemenov
+      changes:
+        - createTable:
+            tableName: students
+            ifNotExists: true
+            schemaName: public
+            columns:
+              - column:
+                  name: student_id
+                  type: UUID
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: name
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: surname
+                  type: varchar(255)
+
+
+        - createTable:
+            tableName: tests
+            ifNotExists: true
+            columns:
+              - column:
+                  name: test_id
+                  type: UUID
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: test_date
+                  type: date
+                  constraints:
+                    nullable: false
+              - column:
+                  name: topic
+                  type: varchar(255)
+
+        - createTable:
+            tableName: test_results
+            ifNotExists: true
+            columns:
+              - column:
+                  name: id
+                  type: UUID
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: topic
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: student_id
+                  type: UUID
+                  constraints:
+                    foreignKey:
+                      referencedTableName: students
+                      referencedColumnNames: student_id
+              - column:
+                  name: mark
+                  type: integer
+                  constraints:
+                    nullable: false
+
+        - createTable:
+            tableName: method_execution_timings
+            ifNotExists: true
+            columns:
+              - column:
+                  name: id
+                  type: UUID
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: method_name
+                  type: varchar(255)
+              - column:
+                  name: execution_time
+                  type: bigint
+              - column:
+                  name: is_async_track
+                  type: boolean
+
+        - insert:
+            tableName: students
+            columns:
+              - column:
+                  name: student_id
+                  value: ec2aa7f4-42d5-442c-8baf-6d4cc6d15db3
+              - column:
+                  name: name
+                  value: Робаут
+              - column:
+                  name: surname
+                  value: Жиллиман
+        - insert:
+            tableName: students
+            columns:
+              - column:
+                  name: student_id
+                  value: fa6f0504-54bd-42b1-8363-7970492e724d
+              - column:
+                  name: name
+                  value: Лев
+              - column:
+                  name: surname
+                  value: Эль-Джонсон
+        - insert:
+            tableName: students
+            columns:
+              - column:
+                  name: student_id
+                  value: 9343e308-0dda-4b1a-bf8b-64819eee192e
+              - column:
+                  name: name
+                  value: Хорус
+              - column:
+                  name: surname
+                  value: Луперкаль
+        - insert:
+            tableName: students
+            columns:
+              - column:
+                  name: student_id
+                  value: ed73b421-85ce-44ea-a625-add7526763b6
+              - column:
+                  name: name
+                  value: Магнус
+              - column:
+                  name: surname
+                  value: Красный
+
+        - insert:
+            tableName: tests
+            columns:
+              - column:
+                  name: test_id
+                  value: 78abce8a-4e5c-41c9-8e2f-077eaadd1c8a
+              - column:
+                  name: test_date
+                  value: 2024-05-11
+              - column:
+                  name: topic
+                  value: Кодекс Астартес
+        - insert:
+            tableName: tests
+            columns:
+
+              - column:
+                  name: test_id
+                  value: 3d2e7ad0-12f5-4568-859b-9707b8c20e7c
+              - column:
+                  name: test_date
+                  value: 2024-05-11
+              - column:
+                  name: topic
+                  value: География Империума
+        - insert:
+            tableName: tests
+            columns:
+              - column:
+                  name: test_id
+                  value: 766d5e0f-c9fb-4c00-9490-634b1092eeb3
+              - column:
+                  name: test_date
+                  value: 2024-05-11
+              - column:
+                  name: topic
+                  value: Борьба с ересью
